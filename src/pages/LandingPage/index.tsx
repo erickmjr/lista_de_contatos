@@ -31,7 +31,7 @@ const LandingPage = () => {
             </S.Body>
             <Footer
                 hrefLink="https://github.com/erickmjr"
-                content={'Criado por erickmjr'}
+                content={'Made by erickmjr'}
             />
         </>
     );

@@ -5,7 +5,7 @@ export const BotaoStyled = styled.button`
     all: unset;
     font-size: 2dvh;
     background-color: ${variaveis.black1};
-    color: white;
+    color: ${variaveis.corH1};
     padding: 1.5dvh;
     width: 90%;
     cursor: pointer;

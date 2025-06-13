@@ -40,6 +40,9 @@ export const Call = styled.div`
     h1 {
         font-size: 6dvh;
         white-space: nowrap;
+        color: ${variaveis.corH1};
+        font-weight: 700;
+        font-style: italic;
 
         @media (max-width: 600px) {
             font-size: 5dvh;
