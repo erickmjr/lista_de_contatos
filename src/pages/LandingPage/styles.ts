@@ -6,6 +6,10 @@ export const Body = styled.div`
     color: ${variaveis.corTexto};
     padding: 10dvh;
     height: 100vh;
+
+    @media (max-width: 600px) {
+        padding: 3dvh;
+    }
 `;
 
 export const ContainerLandingPage = styled.div`
@@ -17,7 +21,13 @@ export const ContainerLandingPage = styled.div`
 export const ContainerHero = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5dvh;
+    grid-gap: 5dvh;
+
+    @media (max-width: 600px) {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5dvh;
+    }
 `;
 
 export const Call = styled.div`
@@ -29,10 +39,18 @@ export const Call = styled.div`
 
     h1 {
         font-size: 6dvh;
+        white-space: nowrap;
+
+        @media (max-width: 600px) {
+            font-size: 5dvh;
+        }
     }
 
     h2 {
         font-size: 4dvh;
+        @media (max-width: 600px) {
+            font-size: 3dvh;
+        }
     }
 `;
 
@@ -44,4 +62,8 @@ export const Image = styled.img`
     width: 100%;
     max-width: 75%;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+        max-width: 100%;
+    }
 `;
