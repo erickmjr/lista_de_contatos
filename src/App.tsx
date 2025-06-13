@@ -24,9 +24,7 @@ function App() {
     return (
         <>
             <EstiloGlobal />
-            <div className="container">
-                <RouterProvider router={rotas} />
-            </div>
+            <RouterProvider router={rotas} />
         </>
     );
 }

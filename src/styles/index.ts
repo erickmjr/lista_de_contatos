@@ -9,6 +9,13 @@ const EstiloGlobal = createGlobalStyle`
         font-family: ${variaveis.fontePrincipal};
         list-style: none;
     }
+
+    a {
+        color: ${variaveis.corTexto};
+        text-decoration: underline;
+        cursor: pointer;
+        letter-spacing: 0.35dvh;
+    }
 `;
 
 export default EstiloGlobal;

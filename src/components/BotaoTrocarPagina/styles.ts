@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import variaveis from '../../styles/variaveis';
 
 export const BotaoStyled = styled.button`
     all: unset;
     font-size: 2dvh;
-    background-color: black;
+    background-color: ${variaveis.black1};
     color: white;
     padding: 1.5dvh;
     width: 90%;
