@@ -10,6 +10,10 @@ const EstiloGlobal = createGlobalStyle`
         list-style: none;
     }
 
+    body {
+        background-color: ${variaveis.backgroundColor};
+    }
+
     a {
         color: ${variaveis.corTexto};
         text-decoration: underline;

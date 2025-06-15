@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import variaveis from '../../styles/variaveis';
 
 export const Body = styled.div`
-    background-color: ${variaveis.backgroundColor};
     color: ${variaveis.corTexto};
     padding: 10dvh;
     height: 100vh;
