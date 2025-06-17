@@ -1,9 +1,15 @@
+import CardContato from '../../components/CardContato';
 import { ListaDeContatosStyled } from './styles';
 
 const ListaDeContatos = () => {
     return (
         <>
-            <ListaDeContatosStyled></ListaDeContatosStyled>
+            <ListaDeContatosStyled>
+                <CardContato />
+                <CardContato />
+                <CardContato />
+                <CardContato />
+            </ListaDeContatosStyled>
         </>
     );
 };

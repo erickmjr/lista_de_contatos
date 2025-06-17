@@ -1,16 +1,19 @@
 import BotaoTrocarPagina from '../../components/BotaoTrocarPagina';
 import Footer from '../../components/footer';
+import BarraTopo from '../../containers/BarraTopo';
 import ListaDeContatos from '../../containers/ListaDeContatos';
+import { PosicionamentoBotaoTrocarPagina } from './styles';
 
 const Visualizacao = () => {
     return (
         <>
-            <div className="container">
-                <h1>Essa eh a tela de visualizacao/edicao da lista</h1>
-                <BotaoTrocarPagina to="/" children={'Return to initial page'} />
-            </div>
+            <BarraTopo />
 
             <ListaDeContatos />
+
+            <PosicionamentoBotaoTrocarPagina>
+                <BotaoTrocarPagina to="/cadastro" children={'Add new item'} />
+            </PosicionamentoBotaoTrocarPagina>
 
             <Footer
                 hrefLink="https://github.com/erickmjr/lista_de_contatos"

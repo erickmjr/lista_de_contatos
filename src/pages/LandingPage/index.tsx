@@ -10,7 +10,7 @@ const LandingPage = () => {
                 <S.ContainerLandingPage>
                     <S.ContainerHero>
                         <S.Call>
-                            <h1>CONTACT LIST</h1>
+                            <S.NomeProjeto>CONTACT LIST</S.NomeProjeto>
                             <h2>Your Contacts, Always Organized</h2>
                             <p>
                                 Keep your phone book in one place. Add, edit,
