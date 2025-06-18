@@ -9,6 +9,14 @@ const ListaDeContatos = () => {
                 <CardContato />
                 <CardContato />
                 <CardContato />
+                <CardContato />
+                <CardContato />
+                <CardContato />
+                <CardContato />
+                <CardContato />
+                <CardContato />
+                <CardContato />
+                <CardContato />
             </ListaDeContatosStyled>
         </>
     );

@@ -1,13 +1,16 @@
-import BotaoTrocarPagina from '../../components/BotaoTrocarPagina';
 import { NomeProjeto } from '../../pages/LandingPage/styles';
 import { BarraTopoStyled } from './styles';
 
-const BarraTopo = () => {
+interface PropsBarraTopo {
+    Botao: React.ReactNode;
+}
+
+const BarraTopo = ({ Botao }: PropsBarraTopo) => {
     return (
         <>
             <BarraTopoStyled>
                 <NomeProjeto>CONTACT LIST</NomeProjeto>
-                <BotaoTrocarPagina to="/" children={'Return to initial page'} />
+                {Botao}
             </BarraTopoStyled>
         </>
     );

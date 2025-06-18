@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const PosicionamentoBotaoTrocarPagina = styled.div`
-    position: absolute;
+    position: fixed;
     bottom: 10dvh;
-    left: 3dvh;
+    left: 5dvh;
+    z-index: 1000;
 `;

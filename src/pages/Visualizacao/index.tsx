@@ -7,12 +7,19 @@ import { PosicionamentoBotaoTrocarPagina } from './styles';
 const Visualizacao = () => {
     return (
         <>
-            <BarraTopo />
+            <BarraTopo
+                Botao={
+                    <BotaoTrocarPagina
+                        to="/"
+                        children={'Return to initial page'}
+                    />
+                }
+            />
 
             <ListaDeContatos />
 
             <PosicionamentoBotaoTrocarPagina>
-                <BotaoTrocarPagina to="/cadastro" children={'Add new item'} />
+                <BotaoTrocarPagina to="/cadastro" children={'Add a contact'} />
             </PosicionamentoBotaoTrocarPagina>
 
             <Footer

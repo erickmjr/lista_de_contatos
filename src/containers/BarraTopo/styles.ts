@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import variaveis from '../../styles/variaveis';
 
 export const BarraTopoStyled = styled.div`
-    width: 100%;
+    width: 100dvw;
     background-color: ${variaveis.black1};
     padding: 2dvh 3dvh;
 
