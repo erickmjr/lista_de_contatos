@@ -1,4 +1,4 @@
-import BotaoAddRemoverContato from '../BotaoAddRemoverContato';
+import BotaoAddRemoverContato from '../BotaoAlterarContato';
 import { ContainerBotoes, ContainerInputs, FormContatoStyled } from './styles';
 import addUser from '../../public/icons/addUser.svg';
 import circleX from '../../public/icons/circleX.svg';
