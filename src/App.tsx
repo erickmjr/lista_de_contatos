@@ -1,9 +1,11 @@
+import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import LandingPage from './pages/LandingPage';
 import Cadastro from './pages/Cadastro';
 import Visualizacao from './pages/Visualizacao';
 import EstiloGlobal from './styles';
+import store from './redux/store';
 
 const rotas = createBrowserRouter([
     {
@@ -22,10 +24,10 @@ const rotas = createBrowserRouter([
 
 function App() {
     return (
-        <>
+        <Provider store={store}>
             <EstiloGlobal />
             <RouterProvider router={rotas} />
-        </>
+        </Provider>
     );
 }
 
