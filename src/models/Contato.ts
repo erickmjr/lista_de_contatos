@@ -1,4 +1,4 @@
-class Contato {
+class ContatoClass {
     nome: string;
     email: string;
     numero: number;
@@ -11,4 +11,4 @@ class Contato {
         this.id = id;
     }
 }
-export default Contato;
+export default ContatoClass;
