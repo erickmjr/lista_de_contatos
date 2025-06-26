@@ -53,3 +53,9 @@ export const ContainerTelefone = styled.div`
     gap: 1dvh;
     font-weight: 500;
 `;
+
+export const ContainerBotoesEdicao = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1dvh;
+`;

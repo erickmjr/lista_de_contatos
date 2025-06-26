@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import {
+    ContainerBotoesEdicao,
     ContainerCard,
     ContainerEmail,
     ContainerNome,
@@ -78,7 +79,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                         />
                     </ContainerTelefone>
                 </InfosContato>
-                <div>
+                <ContainerBotoesEdicao>
                     {!estaEditando ? (
                         <>
                             <BotaoAlterarContato
@@ -131,7 +132,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                             />
                         </>
                     )}
-                </div>
+                </ContainerBotoesEdicao>
             </ContainerCard>
         </>
     );

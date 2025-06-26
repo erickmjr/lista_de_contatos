@@ -6,7 +6,7 @@ export const BotaoAlterarContatoStyled = styled.button`
 
     background-color: ${variaveis.corH1};
     color: ${variaveis.corTexto};
-    border: 1px solid ${variaveis.corTexto};
+    border: 2px solid ${variaveis.black1};
     padding: 1.5dvh;
     font-weight: 600;
 
