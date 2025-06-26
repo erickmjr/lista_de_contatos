@@ -1,10 +1,10 @@
 import { BotaoExcluirStyled } from './styles';
 import trash from '../../public/icons/trash.svg';
 
-const BotaoExcluirContato = () => (
+const BotaoExcluirSalvarContato = () => (
     <BotaoExcluirStyled type="button">
         <img src={trash} alt="trash" />
     </BotaoExcluirStyled>
 );
 
-export default BotaoExcluirContato;
+export default BotaoExcluirSalvarContato;
