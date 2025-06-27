@@ -1,10 +1,10 @@
 class ContatoClass {
     nome: string;
     email: string;
-    numero: number;
+    numero: string;
     id: number;
 
-    constructor(nome: string, email: string, numero: number, id: number) {
+    constructor(nome: string, email: string, numero: string, id: number) {
         this.nome = nome;
         this.email = email;
         this.numero = numero;
