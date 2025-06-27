@@ -6,14 +6,7 @@ type ContatosState = {
 };
 
 const initialState: ContatosState = {
-    contatos: [
-        {
-            nome: 'Erick mello jr',
-            email: 'erickmellojr',
-            numero: 75981895660,
-            id: 1,
-        },
-    ],
+    contatos: [],
 };
 
 const contatosSlice = createSlice({
@@ -34,7 +27,7 @@ const contatosSlice = createSlice({
                 state.contatos[indexDoContato] = action.payload;
             }
         },
-        cadastrar: (state, action: PayloadAction<Omit<Contato, 'id'>>) => {
+        adicionar: (state, action: PayloadAction<Omit<Contato, 'id'>>) => {
             const contatoJaExiste = state.contatos.find(
                 (contato) => contato.numero === action.payload.numero,
             );
@@ -54,6 +47,6 @@ const contatosSlice = createSlice({
     },
 });
 
-export const { remover, editar, cadastrar } = contatosSlice.actions;
+export const { remover, editar, adicionar } = contatosSlice.actions;
 
 export default contatosSlice.reducer;

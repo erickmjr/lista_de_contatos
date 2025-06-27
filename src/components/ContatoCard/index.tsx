@@ -73,7 +73,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                             onChange={(e) => {
                                 const valor = e.target.value;
                                 if (/^\d*$/.test(valor)) {
-                                    setNumeroEditado(Number(valor));
+                                    setNumeroEditado(valor);
                                 }
                             }}
                         />
@@ -107,7 +107,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                                     if (
                                         nomeEditado.length > 0 &&
                                         emailEditado.length > 0 &&
-                                        numeroEditado > 0
+                                        numeroEditado.length > 0
                                     ) {
                                         dispatch(
                                             editar({

@@ -12,6 +12,7 @@ const EstiloGlobal = createGlobalStyle`
 
     body {
         background-color: ${variaveis.backgroundColor};
+        height: 100dvh;
     }
 
     a {
