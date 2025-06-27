@@ -43,6 +43,16 @@ export const ContainerInputs = styled.div`
 
         border-radius: 8px 8px 0 8px;
     }
+
+    .no-spinners::-webkit-outer-spin-button,
+    .no-spinners::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .no-spinners {
+        -moz-appearance: textfield;
+    }
 `;
 
 export const ContainerBotoes = styled.div`
