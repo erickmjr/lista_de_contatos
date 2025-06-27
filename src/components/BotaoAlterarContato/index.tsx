@@ -8,7 +8,7 @@ interface BotaoAlterarProps {
 const BotaoAlterarContato = ({ onClick, imagem }: BotaoAlterarProps) => {
     return (
         <>
-            <BotaoAlterarContatoStyled onClick={onClick}>
+            <BotaoAlterarContatoStyled type="button" onClick={onClick}>
                 <img src={imagem} alt="Alternar edicao" />
             </BotaoAlterarContatoStyled>
         </>
