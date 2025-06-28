@@ -19,6 +19,10 @@ export const ContainerSemContatosMsg = styled.div`
         font-size: 5dvh;
         color: ${variaveis.corH1};
         font-style: italic;
+
+        @media (max-width: 600px) {
+            font-size: 4dvh;
+        }
     }
 
     @media (max-width: 1266px) {
@@ -49,5 +53,9 @@ export const ImagemVisualizacao = styled.img`
 
     @media (max-width: 768px) {
         max-width: 68%;
+    }
+
+    @media (max-width: 600px) {
+        max-width: 100%;
     }
 `;
