@@ -28,12 +28,30 @@ const contatosSlice = createSlice({
             }
         },
         adicionar: (state, action: PayloadAction<Omit<Contato, 'id'>>) => {
-            const contatoJaExiste = state.contatos.find(
+            const numeroJaExiste = state.contatos.find(
                 (contato) => contato.numero === action.payload.numero,
             );
 
-            if (contatoJaExiste) {
-                alert('Já existe um contato com esse número.');
+            const emailJaExiste = state.contatos.find(
+                (contato) => contato.email === action.payload.email,
+            );
+
+            const nomeJaExiste = state.contatos.find(
+                (contato) => contato.nome === action.payload.nome,
+            );
+
+            if (numeroJaExiste) {
+                alert(
+                    `A contact with the phone number "${action.payload.numero}" already exists.`,
+                );
+            } else if (nomeJaExiste) {
+                alert(
+                    `A contact named "${action.payload.nome}" already exists.`,
+                );
+            } else if (emailJaExiste) {
+                alert(
+                    `A contact with the email "${action.payload.email}" already exists.`,
+                );
             } else {
                 const ultimoContato = state.contatos[state.contatos.length - 1];
 
@@ -42,6 +60,7 @@ const contatosSlice = createSlice({
                     id: ultimoContato ? ultimoContato.id + 1 : 1,
                 };
                 state.contatos.push(contatoNovo);
+                alert('Contact added!');
             }
         },
     },
