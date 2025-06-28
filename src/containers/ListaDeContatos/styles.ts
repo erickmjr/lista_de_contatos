@@ -13,5 +13,7 @@ export const ListaDeContatosStyled = styled.div`
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        padding: 2dvh 0;
+        margin-bottom: 0;
     }
 `;

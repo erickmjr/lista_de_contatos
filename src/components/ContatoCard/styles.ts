@@ -7,6 +7,11 @@ export const ContainerCard = styled.div`
     background-color: ${variaveis.corH1};
     padding: 2dvh;
     border-radius: 8px 0 8px 0;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 1.25dvh;
+    }
 `;
 
 export const InfosContato = styled.div`
@@ -27,17 +32,20 @@ export const InfosContato = styled.div`
         border: 2px solid ${variaveis.corH1};
         border-radius: 8px;
     }
+
     input:focus {
         border: 2px solid ${variaveis.backgroundColor};
     }
 `;
 
-export const InputContatoStyled = styled.input``;
-
 export const ContainerNome = styled.div`
     input {
         font-size: 3dvh;
         font-weight: 700;
+
+        @media (max-width: 600px) {
+            font-size: 2.5dvh;
+        }
     }
 `;
 
@@ -47,6 +55,7 @@ export const ContainerEmail = styled.div`
     gap: 1dvh;
     font-weight: 500;
 `;
+
 export const ContainerTelefone = styled.div`
     display: flex;
     align-items: center;
@@ -58,4 +67,9 @@ export const ContainerBotoesEdicao = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1dvh;
+
+    @media (max-width: 600px) {
+        flex-direction: row;
+        justify-content: start;
+    }
 `;
