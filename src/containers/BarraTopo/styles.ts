@@ -8,4 +8,9 @@ export const BarraTopoStyled = styled.div`
 
     display: flex;
     justify-content: space-around;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        gap: 1dvh;
+    }
 `;

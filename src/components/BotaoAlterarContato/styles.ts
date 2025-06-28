@@ -11,4 +11,9 @@ export const BotaoAlterarContatoStyled = styled.button`
     font-weight: 600;
 
     border-radius: 8px 0;
+
+    @media (max-width: 600px) {
+        padding: 0.5dvh;
+        max-width: fit-content;
+    }
 `;
