@@ -8,6 +8,7 @@ import { ContainerBotoes, ContainerInputs, FormContatoStyled } from './styles';
 
 import addUser from '../../public/icons/addUser.svg';
 import circleX from '../../public/icons/circleX.svg';
+import MensagemValidacao from '../MensagemValidacao';
 
 const FormNovoContato = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const FormNovoContato = () => {
     const [emailLocal, setEmailLocal] = useState('');
     const [numeroLocal, setNumeroLocal] = useState('');
 
-    function cancelarAdicao() {
+    function cancelarEdicao() {
         setNomeLocal('');
         setEmailLocal('');
         setNumeroLocal('');
@@ -39,7 +40,7 @@ const FormNovoContato = () => {
         <>
             <FormContatoStyled>
                 <ContainerInputs>
-                    <label htmlFor="nome">Name</label>
+                    <label htmlFor="nomeInput">Name</label>
                     <input
                         type="text"
                         onChange={(e) => setNomeLocal(e.target.value)}
@@ -48,7 +49,7 @@ const FormNovoContato = () => {
                         className={!verificarNome() ? 'campoErro' : ''}
                         placeholder="Type contact's name here..."
                     />
-                    <label htmlFor="email">E-mail</label>
+                    <label htmlFor="emailInput">E-mail</label>
                     <input
                         type="email"
                         onChange={(e) => {
@@ -59,7 +60,7 @@ const FormNovoContato = () => {
                         className={!verificarEmail() ? 'campoErro' : ''}
                         placeholder="janedoe@example.com"
                     />
-                    <label htmlFor="number">Phone number</label>
+                    <label htmlFor="telefoneInput">Phone number</label>
                     <input
                         type="text"
                         maxLength={11}
@@ -86,14 +87,10 @@ const FormNovoContato = () => {
                     <BotaoAlterarContato
                         onClick={() => {
                             if (
-                                !verificarEmail() &&
-                                !verificarNome() &&
-                                !verificarNumero()
+                                verificarEmail() &&
+                                verificarNome() &&
+                                verificarNumero()
                             ) {
-                                alert(
-                                    'Make sure to fill all fields correctly before adding a contact.',
-                                );
-                            } else {
                                 dispatch(
                                     adicionar({
                                         nome: nomeLocal,
@@ -101,7 +98,12 @@ const FormNovoContato = () => {
                                         numero: numeroLocal,
                                     }),
                                 );
-                                cancelarAdicao();
+                                cancelarEdicao();
+                            } else {
+                                <MensagemValidacao
+                                    sucesso={false}
+                                    mensagem="Make sure to fill all fields correctly before adding a contact."
+                                />;
                             }
                         }}
                         imagem={addUser}
@@ -109,11 +111,15 @@ const FormNovoContato = () => {
                     <BotaoAlterarContato
                         imagem={circleX}
                         onClick={() => {
-                            cancelarAdicao();
+                            cancelarEdicao();
                         }}
                     />
                 </ContainerBotoes>
             </FormContatoStyled>
+            <MensagemValidacao
+                sucesso={false}
+                mensagem="Make sure to fill all fields correctly before adding a contact."
+            />
         </>
     );
 };
