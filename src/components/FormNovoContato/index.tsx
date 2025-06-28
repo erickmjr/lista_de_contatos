@@ -15,10 +15,24 @@ const FormNovoContato = () => {
     const [nomeLocal, setNomeLocal] = useState('');
     const [emailLocal, setEmailLocal] = useState('');
     const [numeroLocal, setNumeroLocal] = useState('');
+
     function cancelarAdicao() {
         setNomeLocal('');
         setEmailLocal('');
         setNumeroLocal('');
+    }
+
+    function verificarNome() {
+        return nomeLocal.length >= 2;
+    }
+
+    function verificarEmail() {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(emailLocal.toLowerCase());
+    }
+
+    function verificarNumero() {
+        return numeroLocal.length === 11;
     }
 
     return (
@@ -28,16 +42,22 @@ const FormNovoContato = () => {
                     <label htmlFor="nome">Name</label>
                     <input
                         type="text"
-                        id="nome"
                         onChange={(e) => setNomeLocal(e.target.value)}
                         value={nomeLocal}
+                        id="nomeInput"
+                        className={!verificarNome() ? 'campoErro' : ''}
+                        placeholder="Type contact's name here..."
                     />
                     <label htmlFor="email">E-mail</label>
                     <input
                         type="email"
-                        id="email"
-                        onChange={(e) => setEmailLocal(e.target.value)}
+                        onChange={(e) => {
+                            setEmailLocal(e.target.value);
+                        }}
                         value={emailLocal}
+                        id="emailInput"
+                        className={!verificarEmail() ? 'campoErro' : ''}
+                        placeholder="janedoe@example.com"
                     />
                     <label htmlFor="number">Phone number</label>
                     <input
@@ -52,7 +72,13 @@ const FormNovoContato = () => {
                                 setNumeroLocal(valor);
                             }
                         }}
-                        className="no-spinners"
+                        id="telefoneInput"
+                        className={
+                            !verificarNumero()
+                                ? 'campoErro no-spinners'
+                                : 'no-spinners'
+                        }
+                        placeholder="00 00000-0000"
                     />
                 </ContainerInputs>
 
@@ -60,10 +86,14 @@ const FormNovoContato = () => {
                     <BotaoAlterarContato
                         onClick={() => {
                             if (
-                                nomeLocal.length > 0 &&
-                                emailLocal.length > 0 &&
-                                numeroLocal.length === 11
+                                !verificarEmail() &&
+                                !verificarNome() &&
+                                !verificarNumero()
                             ) {
+                                alert(
+                                    'Make sure to fill all fields correctly before adding a contact.',
+                                );
+                            } else {
                                 dispatch(
                                     adicionar({
                                         nome: nomeLocal,
@@ -72,8 +102,6 @@ const FormNovoContato = () => {
                                     }),
                                 );
                                 cancelarAdicao();
-                            } else {
-                                alert('Phone number must have 11 digits.');
                             }
                         }}
                         imagem={addUser}

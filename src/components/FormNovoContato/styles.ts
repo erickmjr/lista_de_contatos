@@ -35,7 +35,7 @@ export const ContainerInputs = styled.div`
 
         font-size: 2dvh;
 
-        border: 1px solid ${variaveis.corTexto};
+        border: 2px solid ${variaveis.corTexto};
 
         padding: 1.2dvh;
 
@@ -52,6 +52,10 @@ export const ContainerInputs = styled.div`
 
     .no-spinners {
         -moz-appearance: textfield;
+    }
+
+    .campoErro {
+        border: 2px solid ${variaveis.vermelho1};
     }
 `;
 
