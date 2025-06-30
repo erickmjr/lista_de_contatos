@@ -13,6 +13,7 @@ export const BotaoStyled = styled.button`
     font-size: 2.5dvh;
     white-space: nowrap;
     border-radius: 8px 2px 8px 2px;
+    font-weight: 700;
 
     @media (max-width: 600px) {
         background-color: ${variaveis.corH1};
