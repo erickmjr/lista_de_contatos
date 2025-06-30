@@ -12,7 +12,7 @@ const MensagemValidacao = ({ sucesso, mensagem }: PropsMensagemValidacao) => {
     return (
         <>
             <ContainerPopUpForm
-                className={`${visivel ? '' : 'oculto'} ${sucesso ? '' : 'erro'}`}
+                className={`${visivel ? '' : 'oculto'} ${!sucesso ? '' : 'erro'}`}
             >
                 <button type="button" onClick={() => setVisivel(false)}>
                     X

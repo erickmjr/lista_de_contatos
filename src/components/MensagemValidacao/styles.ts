@@ -11,12 +11,18 @@ export const ContainerPopUpForm = styled.div`
     font-size: 2dvh;
     position: absolute;
     bottom: 10dvh;
-    left: 3dvh;
+    right: 3dvh;
     border-radius: 8px 0 8px 0;
     padding: 1dvh 2dvh;
 
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
+
+    @media (max-width: 600px) {
+        padding: 0.5dvh 1.5dvh;
+        text-align: left;
+        max-width: 80%;
+    }
 
     &.erro {
         background-color: ${variaveis.vermelho1};
@@ -33,11 +39,17 @@ export const ContainerPopUpForm = styled.div`
         border-radius: 6px;
         width: fit-content;
         padding: 0.5dvh 1dvh;
+        font-weight: bold;
     }
 
     h3 {
         font-size: 2dvh;
         padding: 1dvh;
         margin: 0;
+
+        @media (max-width: 600px) {
+            font-size: 1.5dvh;
+            max-width: 80%;
+        }
     }
 `;
