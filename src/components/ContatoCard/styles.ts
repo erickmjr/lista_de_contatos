@@ -11,6 +11,7 @@ export const ContainerCard = styled.div`
     @media (max-width: 600px) {
         flex-direction: column;
         gap: 1.25dvh;
+        padding: 1dvh 2dvh;
     }
 `;
 

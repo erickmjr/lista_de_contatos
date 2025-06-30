@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { adicionar } from '../../redux/reducers/contatos';
 
@@ -9,6 +9,7 @@ import { ContainerBotoes, ContainerInputs, FormContatoStyled } from './styles';
 import addUser from '../../public/icons/addUser.svg';
 import circleX from '../../public/icons/circleX.svg';
 import MensagemValidacao from '../MensagemValidacao';
+import type { RootReducer } from '../../redux/store';
 
 const FormNovoContato = () => {
     const dispatch = useDispatch();
@@ -17,6 +18,18 @@ const FormNovoContato = () => {
     const [emailLocal, setEmailLocal] = useState('');
     const [numeroLocal, setNumeroLocal] = useState('');
 
+    const [mostrarMensagem, setMostrarMensagem] = useState(false);
+    const [mensagemLocal, setMensagemLocal] = useState('');
+    const [statusMensagem, setStatusMensagem] = useState(false);
+    const [contadorMensagem, setContadorMensagem] = useState(0);
+
+    const emailJaExiste = useSelector((state: RootReducer) =>
+        state.contatos.some((contato) => contato.email === emailLocal),
+    );
+    const numeroJaExiste = useSelector((state: RootReducer) =>
+        state.contatos.some((contato) => contato.numero === numeroLocal),
+    );
+
     function cancelarEdicao() {
         setNomeLocal('');
         setEmailLocal('');
@@ -24,7 +37,7 @@ const FormNovoContato = () => {
     }
 
     function verificarNome() {
-        return nomeLocal.length >= 2;
+        return nomeLocal.trim().length >= 2;
     }
 
     function verificarEmail() {
@@ -33,7 +46,7 @@ const FormNovoContato = () => {
     }
 
     function verificarNumero() {
-        return numeroLocal.length === 11;
+        return numeroLocal.trim().length === 11;
     }
 
     return (
@@ -82,15 +95,62 @@ const FormNovoContato = () => {
                         placeholder="00 00000-0000"
                     />
                 </ContainerInputs>
-
                 <ContainerBotoes>
                     <BotaoAlterarContato
+                        imagem={addUser}
                         onClick={() => {
                             if (
-                                verificarEmail() &&
-                                verificarNome() &&
-                                verificarNumero()
+                                nomeLocal.trim() === '' &&
+                                numeroLocal.trim() === '' &&
+                                emailLocal.trim() === ''
                             ) {
+                                setMostrarMensagem(true);
+                                setStatusMensagem(false);
+                                setMensagemLocal(
+                                    'Please fill all fields before adding a contact',
+                                );
+                                setContadorMensagem((prev) => prev + 1);
+                            } else if (!verificarNome()) {
+                                setMostrarMensagem(true);
+                                setStatusMensagem(false);
+                                setMensagemLocal(
+                                    'Name must have at least 2 characters.',
+                                );
+                                setContadorMensagem((prev) => prev + 1);
+                                return;
+                            } else if (!verificarEmail()) {
+                                setMostrarMensagem(true);
+                                setStatusMensagem(false);
+                                setMensagemLocal(
+                                    'Enter a valid e-mail address.',
+                                );
+                                setContadorMensagem((prev) => prev + 1);
+                                return;
+                            } else if (!verificarNumero()) {
+                                setMostrarMensagem(true);
+                                setStatusMensagem(false);
+                                setMensagemLocal(
+                                    'Phone number must have 11 digits.',
+                                );
+                                setContadorMensagem((prev) => prev + 1);
+                                return;
+                            } else if (emailJaExiste) {
+                                setMostrarMensagem(true);
+                                setStatusMensagem(false);
+                                setMensagemLocal(
+                                    `"${emailLocal}" already exists in your contact list`,
+                                );
+                                setContadorMensagem((prev) => prev + 1);
+                                return;
+                            } else if (numeroJaExiste) {
+                                setMostrarMensagem(true);
+                                setStatusMensagem(false);
+                                setMensagemLocal(
+                                    `"${numeroLocal}" already exists in your contact list`,
+                                );
+                                setContadorMensagem((prev) => prev + 1);
+                                return;
+                            } else {
                                 dispatch(
                                     adicionar({
                                         nome: nomeLocal,
@@ -99,14 +159,12 @@ const FormNovoContato = () => {
                                     }),
                                 );
                                 cancelarEdicao();
-                            } else {
-                                <MensagemValidacao
-                                    sucesso={false}
-                                    mensagem="Make sure to fill all fields correctly before adding a contact."
-                                />;
+                                setMostrarMensagem(true);
+                                setStatusMensagem(true);
+                                setMensagemLocal('Contact added!');
+                                setContadorMensagem((prev) => prev + 1);
                             }
                         }}
-                        imagem={addUser}
                     />
                     <BotaoAlterarContato
                         imagem={circleX}
@@ -115,11 +173,14 @@ const FormNovoContato = () => {
                         }}
                     />
                 </ContainerBotoes>
+                {mostrarMensagem && (
+                    <MensagemValidacao
+                        key={`${mensagemLocal}-${contadorMensagem}`}
+                        sucesso={!statusMensagem}
+                        mensagem={mensagemLocal}
+                    />
+                )}
             </FormContatoStyled>
-            <MensagemValidacao
-                sucesso={false}
-                mensagem="Make sure to fill all fields correctly before adding a contact."
-            />
         </>
     );
 };
