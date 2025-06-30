@@ -5,7 +5,7 @@ import ContatoCard from '../../components/ContatoCard';
 import SemContatosMsg from '../../components/SemContatosMsg';
 
 const ListaDeContatos = () => {
-    const { contatos } = useSelector((state: RootReducer) => state.contatos);
+    const contatos = useSelector((state: RootReducer) => state.contatos);
 
     return (
         <>
