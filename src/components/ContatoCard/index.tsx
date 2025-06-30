@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
     ContainerBotoesEdicao,
@@ -21,6 +21,9 @@ import { useState } from 'react';
 
 import type Contato from '../../models/Contato';
 import BotaoAlterarContato from '../BotaoAlterarContato';
+import type { RootReducer } from '../../redux/store';
+
+import MensagemValidacao from '../MensagemValidacao';
 
 type Props = Contato;
 
@@ -30,6 +33,18 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
     const [nomeEditado, setNomeEditado] = useState(nome);
     const [emailEditado, setEmailEditado] = useState(email);
     const [numeroEditado, setNumeroEditado] = useState(numero);
+    const [exibirMensagem, setExibirMensagem] = useState(false);
+    const [statusMensagem, setStatusMensagem] = useState(false);
+    const [textoMensagem, setTextoMensagem] = useState('');
+    const [contadorMensagem, setContadorMensagem] = useState(0);
+
+    const emailJaExiste = useSelector((state: RootReducer) =>
+        state.contatos.some((contato) => contato.email === emailEditado),
+    );
+
+    const numeroJaExiste = useSelector((state: RootReducer) =>
+        state.contatos.some((contato) => contato.numero === numeroEditado),
+    );
 
     function cancelarEdicao() {
         setEstaEditando(false);
@@ -105,10 +120,34 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                             <BotaoAlterarContato
                                 onClick={() => {
                                     if (
-                                        nomeEditado.length > 0 &&
-                                        emailEditado.length > 0 &&
-                                        numeroEditado.length > 0
+                                        nomeEditado.length === 0 &&
+                                        emailEditado.length === 0 &&
+                                        numeroEditado.length === 0
                                     ) {
+                                        setExibirMensagem(true);
+                                        setStatusMensagem(true);
+                                        setTextoMensagem(
+                                            'Make sure to fill all fields before saving',
+                                        );
+                                        setContadorMensagem((prev) => prev + 1);
+                                        return;
+                                    } else if (numeroJaExiste) {
+                                        setExibirMensagem(true);
+                                        setStatusMensagem(true);
+                                        setTextoMensagem(
+                                            `"${numeroEditado}" already exists in your list.`,
+                                        );
+                                        setContadorMensagem((prev) => prev + 1);
+                                        return;
+                                    } else if (emailJaExiste) {
+                                        setExibirMensagem(true);
+                                        setStatusMensagem(true);
+                                        setTextoMensagem(
+                                            `"${emailEditado}" already exists in your list.`,
+                                        );
+                                        setContadorMensagem((prev) => prev + 1);
+                                        return;
+                                    } else {
                                         dispatch(
                                             editar({
                                                 nome: nomeEditado,
@@ -118,10 +157,11 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                                             }),
                                         );
                                         setEstaEditando(false);
-                                    } else {
-                                        alert(
-                                            'Make sure to fill correctly all fields before saving',
-                                        );
+                                        setExibirMensagem(true);
+                                        setStatusMensagem(false);
+                                        setTextoMensagem('Edit saved!');
+                                        setContadorMensagem((prev) => prev + 1);
+                                        return;
                                     }
                                 }}
                                 imagem={save}
@@ -131,6 +171,13 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                                 imagem={pencilOff}
                             />
                         </>
+                    )}
+                    {exibirMensagem && (
+                        <MensagemValidacao
+                            key={`${textoMensagem}-${contadorMensagem}`}
+                            sucesso={statusMensagem}
+                            mensagem={textoMensagem}
+                        />
                     )}
                 </ContainerBotoesEdicao>
             </ContainerCard>
