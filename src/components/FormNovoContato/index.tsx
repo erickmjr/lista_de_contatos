@@ -12,6 +12,8 @@ import {
     verificarNumero,
 } from '../../utils/validacoes';
 
+import useLarguraDaTela from '../../utils/larguraTela';
+
 import addUser from '../../public/icons/addUser.svg';
 import circleX from '../../public/icons/circleX.svg';
 import MensagemValidacao from '../MensagemValidacao';
@@ -29,6 +31,8 @@ const FormNovoContato = () => {
     const [statusMensagem, setStatusMensagem] = useState(false);
     const [contadorMensagem, setContadorMensagem] = useState(0);
 
+    const larguraTela = useLarguraDaTela();
+
     const emailJaExiste = useSelector((state: RootReducer) =>
         state.contatos.some((contato) => contato.email === emailLocal),
     );
@@ -40,6 +44,17 @@ const FormNovoContato = () => {
         setNomeLocal('');
         setEmailLocal('');
         setNumeroLocal('');
+    }
+
+    function exibirFeedback(mensagem: string, status: boolean) {
+        if (larguraTela <= 600) {
+            alert(mensagem);
+        } else {
+            setMostrarMensagem(true);
+            setStatusMensagem(status);
+            setMensagemLocal(mensagem);
+            setContadorMensagem((prev) => prev + 1);
+        }
     }
 
     return (
@@ -102,51 +117,36 @@ const FormNovoContato = () => {
                                 numeroLocal.trim() === '' &&
                                 emailLocal.trim() === ''
                             ) {
-                                setMostrarMensagem(true);
-                                setStatusMensagem(false);
-                                setMensagemLocal(
+                                exibirFeedback(
                                     'Please fill all fields before adding a contact',
+                                    false,
                                 );
-                                setContadorMensagem((prev) => prev + 1);
                             } else if (!verificarNome(nomeLocal)) {
-                                setMostrarMensagem(true);
-                                setStatusMensagem(false);
-                                setMensagemLocal(
+                                exibirFeedback(
                                     'Name must have at least 2 characters.',
+                                    false,
                                 );
-                                setContadorMensagem((prev) => prev + 1);
                                 return;
                             } else if (!verificarEmail(emailLocal)) {
-                                setMostrarMensagem(true);
-                                setStatusMensagem(false);
-                                setMensagemLocal(
-                                    'Enter a valid e-mail address.',
-                                );
-                                setContadorMensagem((prev) => prev + 1);
+                                exibirFeedback('Invalid e-mail.', false);
                                 return;
                             } else if (!verificarNumero(numeroLocal)) {
-                                setMostrarMensagem(true);
-                                setStatusMensagem(false);
-                                setMensagemLocal(
+                                exibirFeedback(
                                     'Phone number must have 11 digits.',
+                                    false,
                                 );
-                                setContadorMensagem((prev) => prev + 1);
                                 return;
                             } else if (emailJaExiste) {
-                                setMostrarMensagem(true);
-                                setStatusMensagem(false);
-                                setMensagemLocal(
-                                    `"${emailLocal}" already exists in your contact list`,
+                                exibirFeedback(
+                                    `"${emailLocal}" already exists`,
+                                    false,
                                 );
-                                setContadorMensagem((prev) => prev + 1);
                                 return;
                             } else if (numeroJaExiste) {
-                                setMostrarMensagem(true);
-                                setStatusMensagem(false);
-                                setMensagemLocal(
-                                    `"${numeroLocal}" already exists in your contact list`,
+                                exibirFeedback(
+                                    `"${numeroLocal}" already exists`,
+                                    false,
                                 );
-                                setContadorMensagem((prev) => prev + 1);
                                 return;
                             } else {
                                 dispatch(
@@ -157,10 +157,7 @@ const FormNovoContato = () => {
                                     }),
                                 );
                                 cancelarEdicao();
-                                setMostrarMensagem(true);
-                                setStatusMensagem(true);
-                                setMensagemLocal('Contact added!');
-                                setContadorMensagem((prev) => prev + 1);
+                                exibirFeedback('Contact added!', true);
                             }
                         }}
                     />

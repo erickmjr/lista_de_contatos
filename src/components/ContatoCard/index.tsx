@@ -15,6 +15,8 @@ import {
     verificarNumero,
 } from '../../utils/validacoes';
 
+import useLarguraDaTela from '../../utils/larguraTela';
+
 import mail from '../../public/icons/mail.svg';
 import trash from '../../public/icons/trash.svg';
 import phone from '../../public/icons/phone.svg';
@@ -44,6 +46,8 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
     const [textoMensagem, setTextoMensagem] = useState('');
     const [contadorMensagem, setContadorMensagem] = useState(0);
 
+    const larguraTela = useLarguraDaTela();
+
     const emailJaExiste = useSelector((state: RootReducer) => {
         if (state.contatos.length <= 1) return false;
         return state.contatos.some(
@@ -63,6 +67,17 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
         setNomeEditado(nome);
         setEmailEditado(email);
         setNumeroEditado(numero);
+    }
+
+    function exibirFeedback(mensagem: string, status: boolean) {
+        if (larguraTela <= 600) {
+            alert(mensagem);
+        } else {
+            setExibirMensagem(true);
+            setStatusMensagem(status);
+            setTextoMensagem(mensagem);
+            setContadorMensagem((prev) => prev + 1);
+        }
     }
 
     return (
@@ -135,54 +150,39 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                                         emailEditado.length === 0 &&
                                         numeroEditado.length === 0
                                     ) {
-                                        setExibirMensagem(true);
-                                        setStatusMensagem(true);
-                                        setTextoMensagem(
-                                            'Make sure to fill all fields before saving',
+                                        exibirFeedback(
+                                            'Fill all fields before saving',
+                                            true,
                                         );
-                                        setContadorMensagem((prev) => prev + 1);
                                         return;
                                     } else if (numeroJaExiste) {
-                                        setExibirMensagem(true);
-                                        setStatusMensagem(true);
-                                        setTextoMensagem(
+                                        exibirFeedback(
                                             `"${numeroEditado}" already exists in your list.`,
+                                            true,
                                         );
-                                        setContadorMensagem((prev) => prev + 1);
                                         return;
                                     } else if (emailJaExiste) {
-                                        setExibirMensagem(true);
-                                        setStatusMensagem(true);
-                                        setTextoMensagem(
+                                        exibirFeedback(
                                             `"${emailEditado}" already exists in your list.`,
+                                            true,
                                         );
-                                        setContadorMensagem((prev) => prev + 1);
                                         return;
                                     } else if (!verificarEmail(emailEditado)) {
-                                        setExibirMensagem(true);
-                                        setStatusMensagem(true);
-                                        setTextoMensagem(
-                                            'Please enter a valid e-mail address.',
-                                        );
-                                        setContadorMensagem((prev) => prev + 1);
+                                        exibirFeedback('Invalid e-mail.', true);
                                         return;
                                     } else if (!verificarNome(nomeEditado)) {
-                                        setExibirMensagem(true);
-                                        setStatusMensagem(true);
-                                        setTextoMensagem(
-                                            'Name must have at least 2 characters.',
+                                        exibirFeedback(
+                                            'Field name must have at least 2 characters.',
+                                            true,
                                         );
-                                        setContadorMensagem((prev) => prev + 1);
                                         return;
                                     } else if (
                                         !verificarNumero(numeroEditado)
                                     ) {
-                                        setExibirMensagem(true);
-                                        setStatusMensagem(true);
-                                        setTextoMensagem(
+                                        exibirFeedback(
                                             'Phone number must have 11 digits.',
+                                            true,
                                         );
-                                        setContadorMensagem((prev) => prev + 1);
                                         return;
                                     } else {
                                         dispatch(
@@ -194,10 +194,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                                             }),
                                         );
                                         setEstaEditando(false);
-                                        setExibirMensagem(true);
-                                        setStatusMensagem(false);
-                                        setTextoMensagem('Edit saved!');
-                                        setContadorMensagem((prev) => prev + 1);
+                                        exibirFeedback('Edit saved!.', false);
                                         return;
                                     }
                                 }}
