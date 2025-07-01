@@ -8,7 +8,9 @@ const contatosSlice = createSlice({
     initialState,
     reducers: {
         remover: (state, action: PayloadAction<Contato>) => {
-            state = state.filter((contato) => contato.id !== action.payload.id);
+            return (state = state.filter(
+                (contato) => contato.id !== action.payload.id,
+            ));
         },
         editar: (state, action: PayloadAction<Contato>) => {
             const indexDoContato = state.findIndex(
