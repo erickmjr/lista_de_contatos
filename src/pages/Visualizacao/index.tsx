@@ -19,7 +19,7 @@ const Visualizacao = () => {
             <ListaDeContatos />
 
             <PosicionamentoBotaoTrocarPagina>
-                <BotaoTrocarPagina to="/cadastro" children={'Add a contact'} />
+                <BotaoTrocarPagina to="/cadastro" children={'Add contact'} />
             </PosicionamentoBotaoTrocarPagina>
 
             <Footer

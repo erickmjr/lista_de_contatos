@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ContainerPopUpForm } from './styles';
 
 type PropsMensagemValidacao = {
@@ -8,6 +8,14 @@ type PropsMensagemValidacao = {
 
 const MensagemValidacao = ({ sucesso, mensagem }: PropsMensagemValidacao) => {
     const [visivel, setVisivel] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setVisivel(false);
+        }, 2500);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <>
