@@ -1,7 +1,7 @@
 import * as S from './styles';
 import search from '../../public/images/search.svg';
 import BotaoTrocarPagina from '../../components/BotaoTrocarPagina';
-import Footer from '../../components/Footer';
+import Footer from '../../components/footer';
 
 const LandingPage = () => {
     return (

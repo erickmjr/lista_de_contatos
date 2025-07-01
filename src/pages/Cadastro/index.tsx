@@ -1,5 +1,5 @@
 import BotaoTrocarPagina from '../../components/BotaoTrocarPagina';
-import Footer from '../../components/Footer';
+import Footer from '../../components/footer';
 import FormNovoContato from '../../components/FormNovoContato';
 import BarraTopo from '../../containers/BarraTopo';
 import { ContainerAlinhamentoVertical, FormTitle } from './styles';
