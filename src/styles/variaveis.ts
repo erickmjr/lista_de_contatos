@@ -2,6 +2,7 @@ export default {
     fontePrincipal: "'Montserrat', sans-serif",
     backgroundColor: '#10002b',
     corTexto: '#e0aaff',
+    rosa1: '#9D4EDD',
     black1: '#000',
     corH1: '#edf2f4',
     vermelho1: '#b7094c',
