@@ -80,4 +80,8 @@ export const Image = styled.img`
     @media (max-width: 768px) {
         max-width: 100%;
     }
+
+    @media (max-width: 600px) {
+        max-width: 85%;
+    }
 `;
