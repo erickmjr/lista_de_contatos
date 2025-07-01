@@ -9,6 +9,12 @@ import {
     InfosContato,
 } from './styles';
 
+import {
+    verificarEmail,
+    verificarNome,
+    verificarNumero,
+} from '../../utils/validacoes';
+
 import mail from '../../public/icons/mail.svg';
 import trash from '../../public/icons/trash.svg';
 import phone from '../../public/icons/phone.svg';
@@ -38,13 +44,19 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
     const [textoMensagem, setTextoMensagem] = useState('');
     const [contadorMensagem, setContadorMensagem] = useState(0);
 
-    const emailJaExiste = useSelector((state: RootReducer) =>
-        state.contatos.some((contato) => contato.email === emailEditado),
-    );
+    const emailJaExiste = useSelector((state: RootReducer) => {
+        if (state.contatos.length <= 1) return false;
+        return state.contatos.some(
+            (contato) => contato.email === emailEditado && contato.id !== id,
+        );
+    });
 
-    const numeroJaExiste = useSelector((state: RootReducer) =>
-        state.contatos.some((contato) => contato.numero === numeroEditado),
-    );
+    const numeroJaExiste = useSelector((state: RootReducer) => {
+        if (state.contatos.length <= 1) return false;
+        return state.contatos.some(
+            (contato) => contato.numero === numeroEditado && contato.id !== id,
+        );
+    });
 
     function cancelarEdicao() {
         setEstaEditando(false);
@@ -55,7 +67,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
 
     return (
         <>
-            <ContainerCard>
+            <ContainerCard className={estaEditando ? 'estaEditando' : ''}>
                 <InfosContato>
                     <ContainerNome>
                         <input
@@ -64,6 +76,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                             value={nomeEditado}
                             disabled={!estaEditando}
                             onChange={(e) => setNomeEditado(e.target.value)}
+                            className={estaEditando ? 'estaEditandoInput' : ''}
                         />
                     </ContainerNome>
                     <ContainerEmail>
@@ -74,12 +87,14 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                             value={emailEditado}
                             disabled={!estaEditando}
                             onChange={(e) => setEmailEditado(e.target.value)}
+                            className={estaEditando ? 'estaEditandoInput' : ''}
                         />
                     </ContainerEmail>
                     <ContainerTelefone>
                         <img src={phone} />
                         <input
                             type="text"
+                            id="telefone"
                             maxLength={11}
                             pattern="\d*"
                             value={numeroEditado}
@@ -91,6 +106,7 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                                     setNumeroEditado(valor);
                                 }
                             }}
+                            className={estaEditando ? 'estaEditandoInput' : ''}
                         />
                     </ContainerTelefone>
                 </InfosContato>
@@ -98,16 +114,11 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                     {!estaEditando ? (
                         <>
                             <BotaoAlterarContato
-                                onClick={() =>
+                                onClick={() => {
                                     dispatch(
-                                        remover({
-                                            nome,
-                                            email,
-                                            numero,
-                                            id,
-                                        }),
-                                    )
-                                }
+                                        remover({ nome, email, numero, id }),
+                                    );
+                                }}
                                 imagem={trash}
                             />
                             <BotaoAlterarContato
@@ -144,6 +155,32 @@ const ContatoCard = ({ nome, email, numero, id }: Props) => {
                                         setStatusMensagem(true);
                                         setTextoMensagem(
                                             `"${emailEditado}" already exists in your list.`,
+                                        );
+                                        setContadorMensagem((prev) => prev + 1);
+                                        return;
+                                    } else if (!verificarEmail(emailEditado)) {
+                                        setExibirMensagem(true);
+                                        setStatusMensagem(true);
+                                        setTextoMensagem(
+                                            'Please enter a valid e-mail address.',
+                                        );
+                                        setContadorMensagem((prev) => prev + 1);
+                                        return;
+                                    } else if (!verificarNome(nomeEditado)) {
+                                        setExibirMensagem(true);
+                                        setStatusMensagem(true);
+                                        setTextoMensagem(
+                                            'Name must have at least 2 characters.',
+                                        );
+                                        setContadorMensagem((prev) => prev + 1);
+                                        return;
+                                    } else if (
+                                        !verificarNumero(numeroEditado)
+                                    ) {
+                                        setExibirMensagem(true);
+                                        setStatusMensagem(true);
+                                        setTextoMensagem(
+                                            'Phone number must have 11 digits.',
                                         );
                                         setContadorMensagem((prev) => prev + 1);
                                         return;

@@ -6,6 +6,12 @@ import { adicionar } from '../../redux/reducers/contatos';
 import BotaoAlterarContato from '../BotaoAlterarContato';
 import { ContainerBotoes, ContainerInputs, FormContatoStyled } from './styles';
 
+import {
+    verificarNome,
+    verificarEmail,
+    verificarNumero,
+} from '../../utils/validacoes';
+
 import addUser from '../../public/icons/addUser.svg';
 import circleX from '../../public/icons/circleX.svg';
 import MensagemValidacao from '../MensagemValidacao';
@@ -36,19 +42,6 @@ const FormNovoContato = () => {
         setNumeroLocal('');
     }
 
-    function verificarNome() {
-        return nomeLocal.trim().length >= 2;
-    }
-
-    function verificarEmail() {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(emailLocal.toLowerCase());
-    }
-
-    function verificarNumero() {
-        return numeroLocal.trim().length === 11;
-    }
-
     return (
         <>
             <FormContatoStyled>
@@ -59,8 +52,9 @@ const FormNovoContato = () => {
                         onChange={(e) => setNomeLocal(e.target.value)}
                         value={nomeLocal}
                         id="nomeInput"
-                        className={!verificarNome() ? 'campoErro' : ''}
+                        className={!verificarNome(nomeLocal) ? 'campoErro' : ''}
                         placeholder="Type contact's name here..."
+                        autoComplete="name"
                     />
                     <label htmlFor="emailInput">E-mail</label>
                     <input
@@ -70,8 +64,11 @@ const FormNovoContato = () => {
                         }}
                         value={emailLocal}
                         id="emailInput"
-                        className={!verificarEmail() ? 'campoErro' : ''}
+                        className={
+                            !verificarEmail(emailLocal) ? 'campoErro' : ''
+                        }
                         placeholder="janedoe@example.com"
+                        autoComplete="email"
                     />
                     <label htmlFor="telefoneInput">Phone number</label>
                     <input
@@ -88,11 +85,12 @@ const FormNovoContato = () => {
                         }}
                         id="telefoneInput"
                         className={
-                            !verificarNumero()
+                            !verificarNumero(numeroLocal)
                                 ? 'campoErro no-spinners'
                                 : 'no-spinners'
                         }
                         placeholder="00 00000-0000"
+                        autoComplete="tel"
                     />
                 </ContainerInputs>
                 <ContainerBotoes>
@@ -110,7 +108,7 @@ const FormNovoContato = () => {
                                     'Please fill all fields before adding a contact',
                                 );
                                 setContadorMensagem((prev) => prev + 1);
-                            } else if (!verificarNome()) {
+                            } else if (!verificarNome(nomeLocal)) {
                                 setMostrarMensagem(true);
                                 setStatusMensagem(false);
                                 setMensagemLocal(
@@ -118,7 +116,7 @@ const FormNovoContato = () => {
                                 );
                                 setContadorMensagem((prev) => prev + 1);
                                 return;
-                            } else if (!verificarEmail()) {
+                            } else if (!verificarEmail(emailLocal)) {
                                 setMostrarMensagem(true);
                                 setStatusMensagem(false);
                                 setMensagemLocal(
@@ -126,7 +124,7 @@ const FormNovoContato = () => {
                                 );
                                 setContadorMensagem((prev) => prev + 1);
                                 return;
-                            } else if (!verificarNumero()) {
+                            } else if (!verificarNumero(numeroLocal)) {
                                 setMostrarMensagem(true);
                                 setStatusMensagem(false);
                                 setMensagemLocal(
