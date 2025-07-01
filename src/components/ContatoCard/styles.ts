@@ -33,7 +33,7 @@ export const InfosContato = styled.div`
         resize: none;
         resize: none;
         padding: 0.75dvh;
-        color: ${variaveis.backgroundColor};
+        color: ${variaveis.black1};
         width: 80%;
         font-size: 2dvh;
         border: 2.5px solid transparent;
@@ -49,7 +49,7 @@ export const InfosContato = styled.div`
     }
 
     @media (max-width: 600px) {
-        width: 100%;
+        max-width: 100%;
     }
 `;
 
