@@ -16,7 +16,7 @@ export const BotaoStyled = styled.button`
     font-weight: 700;
 
     @media (max-width: 600px) {
-        background-color: ${variaveis.corH1};
-        color: ${variaveis.black1};
+        background-color: ${variaveis.rosa1};
+        color: ${variaveis.corH1};
     }
 `;

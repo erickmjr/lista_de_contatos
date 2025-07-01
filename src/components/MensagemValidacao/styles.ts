@@ -19,7 +19,7 @@ export const ContainerPopUpForm = styled.div`
     transition: opacity 0.3s ease-in-out;
 
     @media (max-width: 600px) {
-        padding: 0.5dvh 1.5dvh;
+        padding: 1.25dvh;
         text-align: left;
         max-width: 80%;
     }
@@ -48,7 +48,7 @@ export const ContainerPopUpForm = styled.div`
         margin: 0;
 
         @media (max-width: 600px) {
-            font-size: 1.5dvh;
+            font-size: 2dvh;
             max-width: 80%;
         }
     }

@@ -16,5 +16,10 @@ export const ListaDeContatosStyled = styled.div`
         padding: 2dvh;
         margin-bottom: 0;
         width: 100%;
+        max-height: 68dvh;
+    }
+
+    @media (max-width: 600px) {
+        max-height: 62dvh;
     }
 `;

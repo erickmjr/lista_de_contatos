@@ -5,4 +5,8 @@ export const PosicionamentoBotaoTrocarPagina = styled.div`
     bottom: 10dvh;
     left: 5dvh;
     z-index: 1000;
+
+    @media (max-width: 600px) {
+        left: 2dvh;
+    }
 `;
