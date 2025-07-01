@@ -11,4 +11,8 @@ export const FooterStyled = styled.footer`
     background-color: ${variaveis.black1};
     text-align: center;
     z-index: 100;
+
+    @media (max-width: 600px) {
+        padding: 1dvh;
+    }
 `;

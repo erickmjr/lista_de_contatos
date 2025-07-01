@@ -8,7 +8,6 @@ export const ContainerPopUpForm = styled.div`
 
     background-color: ${variaveis.verde1};
     color: ${variaveis.corH1};
-    font-size: 2dvh;
     position: absolute;
     bottom: 10dvh;
     right: 3dvh;
@@ -20,8 +19,10 @@ export const ContainerPopUpForm = styled.div`
 
     @media (max-width: 600px) {
         padding: 1.25dvh;
+        width: fit-content;
         text-align: left;
-        max-width: 80%;
+        left: 2dvh;
+        bottom: 15dvh;
     }
 
     &.erro {
@@ -46,10 +47,10 @@ export const ContainerPopUpForm = styled.div`
         font-size: 2dvh;
         padding: 1dvh;
         margin: 0;
+        text-align: start;
 
         @media (max-width: 600px) {
-            font-size: 2dvh;
-            max-width: 80%;
+            font-size: 1.65dvh;
         }
     }
 `;

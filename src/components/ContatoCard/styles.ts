@@ -34,6 +34,8 @@ export const InfosContato = styled.div`
         resize: none;
         padding: 0.75dvh;
         color: ${variaveis.black1};
+        -webkit-text-fill-color: ${variaveis.black1};
+        opacity: 1;
         width: 80%;
         font-size: 2dvh;
         border: 2.5px solid transparent;
@@ -49,7 +51,7 @@ export const InfosContato = styled.div`
     }
 
     @media (max-width: 600px) {
-        max-width: 100%;
+        width: 100%;
     }
 `;
 
@@ -77,6 +79,7 @@ export const ContainerEmail = styled.div`
 
         @media (max-width: 600px) {
             max-width: 100%;
+            width: 100%;
         }
     }
 `;

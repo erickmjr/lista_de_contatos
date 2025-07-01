@@ -1,5 +1,5 @@
 import BotaoTrocarPagina from '../../components/BotaoTrocarPagina';
-import Footer from '../../components/footer';
+import Footer from '../../components/Footer';
 import BarraTopo from '../../containers/BarraTopo';
 import ListaDeContatos from '../../containers/ListaDeContatos';
 import { PosicionamentoBotaoTrocarPagina } from './styles';
