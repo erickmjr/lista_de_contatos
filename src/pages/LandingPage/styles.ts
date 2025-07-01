@@ -14,7 +14,7 @@ export const Body = styled.div`
 export const ContainerLandingPage = styled.div`
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 85%;
 `;
 
 export const ContainerHero = styled.div`
