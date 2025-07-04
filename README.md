@@ -1,7 +1,3 @@
-Claro! Aqui está um exemplo de README.md para o seu projeto Lista de Contatos, utilizando TypeScript, React, Redux, React Router e Styled-Components:
-
----
-
 # Lista de Contatos
 
 Lista de contatos desenvolvida com TypeScript e React, utilizando Redux para gerenciamento de estado, React Router para navegação e Styled-Components para estilização.
